@@ -1,0 +1,13 @@
+spring:
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:category-test?allowMultiQueries=true
+    username: sa
+    password:
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.category.dto

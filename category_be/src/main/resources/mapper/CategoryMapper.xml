@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.category.mapper.CategoryMapper">
+    <resultMap id="getCategoryInfoMap" type="com.category.dto.service.CategoryInfoDto">
+        <id property="categoryId" column="CATEGORY_ID"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="parentCategoryId" column="PARENT_CATEGORY_ID"/>
+        <result property="isDisplay" column="IS_DISPLAY"/>
+        <result property="categorySeq" column="CATEGORY_SEQ"/>
+    </resultMap>
+
+    <select id="getCategoryListByParentCategoryId" resultMap="getCategoryInfoMap">
+        SELECT
+            CATEGORY_ID, CATEGORY_NAME, PARENT_CATEGORY_ID, CATEGORY_SEQ,
+            IS_DISPLAY
+        FROM CATEGORY
+        <where>
+            <if test="categoryId != null">AND PARENT_CATEGORY_ID = #{categoryId}</if>
+        </where>
+        ORDER BY CATEGORY_SEQ ASC
+    </select>
+
+    <select id="getCategoryList" resultMap="getCategoryInfoMap">
+        SELECT
+            CATEGORY_ID, CATEGORY_NAME, PARENT_CATEGORY_ID, CATEGORY_SEQ,
+            IS_DISPLAY
+        FROM CATEGORY
+        ORDER BY CATEGORY_SEQ ASC
+    </select>
+
+    <select id="getCategoryByCategoryId" resultMap="getCategoryInfoMap">
+        SELECT
+            CATEGORY_ID, CATEGORY_NAME, PARENT_CATEGORY_ID, CATEGORY_SEQ,
+            IS_DISPLAY
+        FROM CATEGORY
+        WHERE CATEGORY_ID = #{categoryId}
+        LIMIT 1
+    </select>
+
+    <delete id="deleteCategory">
+        DELETE
+        FROM CATEGORY
+        WHERE CATEGORY_ID = #{categoryId}
+    </delete>
+
+    <insert id="createCategory" parameterType="com.category.dto.entity.CategoryEntityDto" useGeneratedKeys="true" keyProperty="categoryId">
+        INSERT INTO CATEGORY (CATEGORY_NAME, PARENT_CATEGORY_ID, CATEGORY_SEQ, IS_DISPLAY,
+                              UPDATED_AT, CREATED_AT)
+        VALUES (#{categoryName}, #{parentCategoryId}, #{categorySeq}, #{isDisplay},
+                NOW(), NOW())
+    </insert>
+
+    <update id="updateCategory" parameterType="com.category.dto.entity.CategoryEntityDto">
+        UPDATE CATEGORY
+        <set>
+            <if test="categoryName != null">CATEGORY_NAME = #{categoryName},</if>
+            <if test="categorySeq != null">CATEGORY_SEQ = #{categorySeq},</if>
+            <if test="parentCategoryId != null">PARENT_CATEGORY_ID = #{parentCategoryId},</if>
+            <if test="isDisplay != null">IS_DISPLAY = #{isDisplay},</if>
+            UPDATED_AT = NOW()
+        </set>
+        WHERE CATEGORY_ID = #{categoryId}
+    </update>
+
+    <update id="updateCategorySeq">
+        <![CDATA[
+        SET @seq=${categorySeq};
+
+        UPDATE CATEGORY
+        SET CATEGORY_SEQ = @seq:=@seq+1
+        WHERE PARENT_CATEGORY_ID = ${parentCategoryId}
+          AND CATEGORY_SEQ >= ${categorySeq}
+        ORDER BY CATEGORY_SEQ ASC
+        ]]>
+    </update>
+</mapper>
