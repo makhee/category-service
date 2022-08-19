@@ -18,7 +18,7 @@ export function addCategory(params) {
 
 export function modifyCategory(params) {
     return request({
-        url: '/categories',
+        url: '/categories/' + params.categoryId,
         method: 'put',
         data: params
     })
@@ -26,8 +26,15 @@ export function modifyCategory(params) {
 
 export function removeCategory(params) {
     return request({
-        url: '/categories',
+        url: '/categories/' + params.categoryId,
         method: 'delete',
         data: params
+    })
+}
+
+export function getCategoryInfo(params) {
+    return request({
+        url: '/categories/' + params.categoryId,
+        method: 'get',
     })
 }
