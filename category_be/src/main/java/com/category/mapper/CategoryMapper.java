@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface CategoryMapper {
-    ArrayList<CategoryInfoDto> getCategoryListByParentCategoryId(Integer categoryId);
+    ArrayList<CategoryInfoDto> getCategoryListByParentCategoryId(int categoryId);
 
     CategoryInfoDto getCategoryByCategoryId(int categoryId);
 

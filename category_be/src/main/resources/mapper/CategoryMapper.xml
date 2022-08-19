@@ -16,17 +16,7 @@
             CATEGORY_ID, CATEGORY_NAME, PARENT_CATEGORY_ID, CATEGORY_SEQ,
             IS_DISPLAY
         FROM CATEGORY
-        <where>
-            <if test="categoryId != null">AND PARENT_CATEGORY_ID = #{categoryId}</if>
-        </where>
-        ORDER BY CATEGORY_SEQ ASC
-    </select>
-
-    <select id="getCategoryList" resultMap="getCategoryInfoMap">
-        SELECT
-            CATEGORY_ID, CATEGORY_NAME, PARENT_CATEGORY_ID, CATEGORY_SEQ,
-            IS_DISPLAY
-        FROM CATEGORY
+        WHERE PARENT_CATEGORY_ID = #{categoryId}
         ORDER BY CATEGORY_SEQ ASC
     </select>
 

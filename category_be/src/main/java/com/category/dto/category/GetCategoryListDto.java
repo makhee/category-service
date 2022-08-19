@@ -8,9 +8,9 @@ import lombok.Getter;
 import java.util.ArrayList;
 
 public class GetCategoryListDto {
-    @Getter
+    @Data
     public static class RequestDto {
-        private Integer categoryId;
+        private int categoryId;
     }
 
     @Data

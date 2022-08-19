@@ -21,7 +21,7 @@ public interface CategoryService {
     int deleteCategory(int categoryId);
 
     // 카테고리 그룹 조회 By parentCategoryId
-    ArrayList<CategoryInfoListDto> getCategoryList(Integer categoryId);
+    ArrayList<CategoryInfoListDto> getCategoryList(int categoryId);
 
     // 카테고리 단일 조회 By categoryId
     CategoryInfoDto getCategoryByCategoryId(int categoryId);

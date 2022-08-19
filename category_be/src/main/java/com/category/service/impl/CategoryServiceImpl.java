@@ -62,7 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ArrayList<CategoryInfoListDto> getCategoryList(Integer categoryId) {
+    public ArrayList<CategoryInfoListDto> getCategoryList(int categoryId) {
         ArrayList<CategoryInfoDto> categoryInfoList = categoryMapper.getCategoryListByParentCategoryId(categoryId);
         ArrayList<CategoryInfoListDto> categoryInfoListDto = new ArrayList<>();
         for (CategoryInfoDto categoryInfo : categoryInfoList) {
