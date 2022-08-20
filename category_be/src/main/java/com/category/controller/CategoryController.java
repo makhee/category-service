@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import java.util.ArrayList;
 
 @RestController
@@ -38,8 +37,9 @@ public class CategoryController {
         카테고리 상세 조회
      */
     @GetMapping("/{categoryId}")
-    public CommonResponseDto getCategory(@Min(1) @PathVariable("categoryId") int categoryId) {
+    public CommonResponseDto getCategory(@PathVariable("categoryId") int categoryId) {
         CategoryInfoDto categoryInfoDto = categoryService.getCategoryByCategoryId(categoryId);
+        if (categoryInfoDto == null) throw new NoSearchResultException("카테고리 정보를 조회할 수 없습니다.");
 
         GetCategoryDetailDto.ResponseDto response = new GetCategoryDetailDto.ResponseDto();
         response.setCategoryInfo(categoryInfoDto);

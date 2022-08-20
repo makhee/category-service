@@ -1,0 +1,18 @@
+version: "3"
+services:
+  category_fe:
+    container_name: "category_fe"
+    build:
+      context: ./category_fe
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - was
+  category_be:
+    container_name: "category_be"
+    build:
+      context: ./category_be
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
