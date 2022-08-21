@@ -92,6 +92,8 @@ frontend: http://localhost
 
 backend: http://localhost:8080
 
+swagger: http://localhost:8080/swagger-ui/#/category-controller
+
 로컬 환경에서만 기능이 동작합니다. 
 
 별도 서버에서 실행하기위해서는, frontend -> backend api호출 URL을 변경해야합니다.
