@@ -21,14 +21,22 @@ Category Service 관련 레포지토리입니다.
    - Language
       - JavaScript
 
-## Installation
-### Docker 설치 (Centos 7)
+## Installation (Centos 7기준)
+### 패키지 업데이트
+```
+$ sudo yum -y update
+```
+
+### Git 설치 && Clone
+```
+$ sudo yum install git
+
+$ git clone https://github.com/makhee/category-service.git
+```
+
+### Docker 설치
 [참고 사이트](https://velog.io/@thipu/Centos-7-docker-docker-compose-%EC%84%A4%EC%B9%98)
 
-#### 패키지 업데이트
-```
-$ yum -y update
-```
 #### docker 설치
 ```
 # docker 설치
@@ -45,12 +53,9 @@ $ sudo systemctl status docker
 # 부팅시 자동 시작 설정
 $ sudo systemctl enable docker
 
-# docker
-$ sudo usermod -aG docker docker
-
 # docker 버전 확인
 $ sudo docker --version
-Docker version 1.13.1, build 7d71120/1.13.1 
+Docker version 20.10.17, build 100c701
 ```
 
 #### docker-compose 설치
@@ -71,6 +76,13 @@ docker-compose 를 수행 하면서 backend 와 frontend 를 빌드합니다.
 ```
 # project dir 이동후 docker-compose 커맨드 실행
 $ docker-compose up -d --build --force-recreate
+```
+#### permission denied 발생하는 경우
+```
+# permission denied 발생하는 경우 아래 커맨드 입력
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+$ sudo chmod 666 /var/run/docker.sock
 ```
 
 ## Connect
