@@ -85,9 +85,14 @@ $ sudo usermod -aG docker $USER
 $ sudo chmod 666 /var/run/docker.sock
 ```
 
-## Connect
+## Etc
 docker 가 정상적으로 UP 된다면 아래 URL 로 접근가능합니다.
 
 frontend: http://localhost
 
 backend: http://localhost:8080
+
+로컬 환경에서만 기능이 동작합니다. 
+
+별도 서버에서 실행하기위해서는, frontend -> backend api호출 URL을 변경해야합니다.
+backend 에서도 com/category/config/CorsConfig.java 파일의 allowedOrigins 값을 변경해야합니다.
